@@ -3,7 +3,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -36,6 +35,6 @@ public class Hotel {
     @Column(name = "stars")
     private int stars;
 
-//    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-//    private List<Room> rooms;
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private List<Room> rooms;
 }

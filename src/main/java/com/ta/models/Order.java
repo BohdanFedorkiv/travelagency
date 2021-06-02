@@ -21,16 +21,6 @@ public class Order {
     @Column(name = "number")
     private int number;
 
-//    @NotNull
-//    @ManyToOne
-//    @JoinColumn(name = "room_id")
-//    private Room room;
-
-//    @NotNull
-//    @ManyToOne
-//    @JoinColumn(name = "person_id")
-//    private Person person;
-
     @NotNull
     @Column(name = "checkin")
     private LocalDate checkin;
@@ -38,4 +28,14 @@ public class Order {
     @NotNull
     @Column(name = "checkout")
     private LocalDate checkout;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 }
