@@ -40,10 +40,15 @@ public class Person {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private List<Role> roles;
+    //@Enumerated(EnumType.STRING)
+    //@Column(name = "role")
+    //private List<Role> roles;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Order> orders;
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    //@CollectionTable(name = "persons_role", joinColumns = @JoinColumn(name = "person_id"))
+//    @Enumerated(EnumType.STRING)
+//    private List<Role> roles;
+
+//    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+//    private List<Order> orders;
 }

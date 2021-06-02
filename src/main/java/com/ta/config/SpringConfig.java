@@ -8,23 +8,28 @@ import org.springframework.web.servlet.view.JstlView;
 
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("com.ta")
+@EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer  {
 
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/pages/");
         resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
 
         return resolver;
     }
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+//    }
+
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }
 

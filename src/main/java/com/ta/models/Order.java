@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "hotels")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,15 +21,15 @@ public class Order {
     @Column(name = "number")
     private int number;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+//    @NotNull
+//    @ManyToOne
+//    @JoinColumn(name = "room_id")
+//    private Room room;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+//    @NotNull
+//    @ManyToOne
+//    @JoinColumn(name = "person_id")
+//    private Person person;
 
     @NotNull
     @Column(name = "checkin")

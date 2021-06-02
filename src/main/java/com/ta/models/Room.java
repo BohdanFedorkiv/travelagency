@@ -28,14 +28,14 @@ public class Room {
     @Column(name = "price")
     private double price;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "hotel_id")
-    private Hotel hotel;
+//    @NotNull
+//    @ManyToOne
+//    @JoinColumn(name = "hotel_id")
+//    private Hotel hotel;
 
     @Column(name = "available")
     private boolean available;
 
-    @OneToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
+//    private List<Order> orders;
 }
