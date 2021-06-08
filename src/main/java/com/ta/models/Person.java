@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 
+//@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,7 +44,7 @@ public class Person {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private List<Order> orders;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+//    private List<Order> orders;
 }

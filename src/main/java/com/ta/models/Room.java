@@ -1,15 +1,17 @@
 package com.ta.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
+//@Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "rooms")
 public class Room {
@@ -36,6 +38,58 @@ public class Room {
     @Column(name = "available")
     private boolean available;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Order> orders;
+
+    public long getId() {
+        return id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
