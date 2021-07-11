@@ -1,11 +1,13 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%--<style><%@include file="/WEB-INF/resources/css/ava-rooms.css"%></style>--%>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Hello, world!</title>
+    <title>Filter</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,27 +40,45 @@
                     <a class="nav-link" href="/orders/allorders/${person.id}">My orders</a>
                 </li>
             </c:if>
-            <c:if test="${person == null}">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-            </c:if>
-            <c:if test="${person != null}">
-                <li class="nav-item">
-                    <a class="nav-link" href="/hotels/dates">See available dates</a>
-                </li>
-            </c:if>
         </ul>
     </div>
 </nav>
-<c:if test="${info == 'anonymousUser'}">
-    <h1></h1>
-</c:if>
-<c:if test="${info != 'anonymousUser'}">
-    <h1>Welcome ${info}</h1>
-    <c:forEach var="order" items="${info2}">
-       <p>${order.authority}</p>
+<table>
+    <thead>
+    <h3>Book your room</h3>
+    <a>Available rooms</a>
+    <input name="checkin" value="${checkin}" readonly/>
+    <input name="checkout" value="${checkout}" readonly/>
+    <br/>
+    <a href="/hotels/dates">Change Dates</a>
+    <tr>
+        <th>Id</th>
+        <th>Hotel</th>
+        <th>Price</th>
+        <th>Number</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="room" items="${available}">
+        <c:url var="Link" value="#">
+            <c:param name="roomId" value="${room.id}"/>
+            <c:param name="checkin" value="${checkin}"/>
+            <c:param name="checkout" value="${checkout}"/>
+        </c:url>
+        <sf:form method="get" action="/rooms/allRooms/${room.hotel.id}">
+            <tr>
+                <td>${room.id}</td>
+                <td>${room.hotel.name}</td>
+                <td>${room.price}</td>
+                <td>${room.number}</td>
+                <td>
+                    <button type="submit">Book</button>
+                </td>
+            </tr>
+        </sf:form>
     </c:forEach>
-</c:if>
+    </tbody>
+</table>
 </body>
 </html>

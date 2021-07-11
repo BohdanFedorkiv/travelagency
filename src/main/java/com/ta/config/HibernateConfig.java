@@ -48,8 +48,8 @@ public class HibernateConfig {
         hibernateProperties.setProperty(
                 "hibernate.current_session_context_class", "thread"
         );
-//        hibernateProperties.setProperty("hibernate.show_sql", "true");
-//        hibernateProperties.setProperty("hibernate.format_sql", "true");
+        hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.format_sql", "true");
         return hibernateProperties;
     }
 

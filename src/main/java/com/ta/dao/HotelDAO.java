@@ -1,6 +1,5 @@
 package com.ta.dao;
 import com.ta.models.Hotel;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -10,10 +9,11 @@ public interface HotelDAO {
 
     List<Hotel> allHotels();
 
-    List<Hotel> searchHotelByCountry(String country);
+    List<Hotel> searchHotelByCountryOrCity(String name);
 
-    Optional<Hotel> getHotel(String name);
+    Optional<Hotel> getHotelByName(String name);
+
+    Optional<Hotel> getHotelById(Long id);
 
     void deleteHotel(Long id);
-
 }

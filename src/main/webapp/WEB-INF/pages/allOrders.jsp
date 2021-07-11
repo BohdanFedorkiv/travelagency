@@ -1,10 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Users</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,25 +37,30 @@
         </ul>
     </div>
 </nav>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Email</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="person" items="${persons}">
+<div class="container">
+    <hr>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
         <tr>
-            <td>${person.id}</td>
-            <td><a href="/orders/allorders/${person.id}">${person.email}</a></td>
-            <td>${person.firstName}</td>
-            <td>${person.lastName}</td>
+            <th>Room number</th>
+            <th>Hotel name</th>
+            <th>Checkin</th>
+            <th>Checkout</th>
+            <th>Delete</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="order" items="${orders}">
+            <tr>
+                <td>${order.room.number}</td>
+                <td>${order.room.hotel.name}</td>
+                <td>${order.checkin}</td>
+                <td>${order.checkout}</td>
+                <th><a href="/orders/delete/${order.id}">Delete</a></th>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -4,13 +4,15 @@ import java.util.List;
 
 
 public interface HotelService {
-    void saveHotel(Hotel hotel);
+    boolean saveHotel(Hotel hotel);
 
     List<Hotel> allHotels();
 
-    List<Hotel> searchHotelByCountry(String countryName);
+    List<Hotel> searchHotelByCountryOrCity(String name);
 
-    Hotel getHotel(String name);
+    Hotel getHotelByName(String name);
+
+    Hotel getHotelById(Long id);
 
     void deleteHotel(Long id);
 

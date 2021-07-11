@@ -23,6 +23,7 @@ public class Room {
     @Column(name = "number")
     private int number;
 
+    @NotNull
     @Column(name = "capacity")
     private int capacity;
 
@@ -35,10 +36,7 @@ public class Room {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    @Column(name = "available")
-    private boolean available;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public long getId() {
@@ -61,10 +59,6 @@ public class Room {
         return hotel;
     }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
@@ -83,10 +77,6 @@ public class Room {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
     public void setOrders(List<Order> orders) {

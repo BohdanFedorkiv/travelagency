@@ -5,40 +5,51 @@
 
 <head>
     <%@ page isELIgnored="false" %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
-
 
 <html>
 <head>
     <title>Add a hotel</title>
 </head>
 <body>
-<%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>--%>
-<%--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"--%>
-<%--        type="text/javascript"></script>--%>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
       rel="Stylesheet"type="text/css"/>
-<%--<script type="text/javascript">--%>
-<%--    $(function () {--%>
-<%--        $("#txtFrom").datepicker({--%>
-<%--            numberOfMonths: 2,--%>
-<%--            onSelect: function (selected) {--%>
-<%--                var dt = new Date(selected);--%>
-<%--                dt.setDate(dt.getDate() + 1);--%>
-<%--                $("#txtTo").datepicker("option", "minDate", dt);--%>
-<%--            }--%>
-<%--        });--%>
-<%--        $("#txtTo").datepicker({--%>
-<%--            numberOfMonths: 2,--%>
-<%--            onSelect: function (selected) {--%>
-<%--                var dt = new Date(selected);--%>
-<%--                dt.setDate(dt.getDate() - 1);--%>
-<%--                $("#txtFrom").datepicker("option", "maxDate", dt);--%>
-<%--            }--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
-<form:form method="post" action="/orders/create" modelAttribute="order">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hotels/allhotels">See all hotels</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/persons/create">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <form class="btn__item" action="/auth/logout" method="POST">
+                    <button class="btn" type="submit">Logout </button>
+                </form>
+            </li>
+            <c:if test="${person == null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+            </c:if>
+            <c:if test="${person != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/allorders/${person.id}">My orders</a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
+</nav>
+<form:form method="post" action="/orders/create/${room_id.id}" modelAttribute="order">
     <table>
         <tr>
             <td>
@@ -57,14 +68,6 @@
             </td>
         </tr>
     </table>
-    <div>
-        <label for="room_id">Room</label>
-        <select id="room_id" name="room_id">
-            <c:forEach var="room" items="${rooms}">
-                <option value="${room.number}">${room.number}</option>
-            </c:forEach>
-        </select>
-    </div>
     <button type="submit">Add an order</button>
 </form:form>
 </body>

@@ -13,30 +13,51 @@
 </head>
 
 <body>
-
-
-    <div class="container">
-        <hr>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>Id</th>
-                <th>Number</th>
-                <th>Capacity</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="room" items="${rooms}">
-                <tr>
-                    <td>${room.id}</td>
-                    <td>${room.number}</td>
-                    <td>${room.capacity}</td>
-                    <td>${room.price}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hotels/allhotels">See all hotels</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/persons/create">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <form class="btn__item" action="/auth/logout" method="POST">
+                    <button class="btn" type="submit">Logout </button>
+                </form>
+            </li>
+        </ul>
     </div>
+</nav>
+<div class="container">
+    <hr>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>Hotel name</th>
+            <th>Number</th>
+            <th>Capacity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="room" items="${rooms}">
+            <tr>
+                <td>${room.hotel.name}</td>
+                <td><a href="/orders/create/${room.id}">${room.number}</a></td>
+                <td>${room.capacity}</td>
+                <td>${room.price}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

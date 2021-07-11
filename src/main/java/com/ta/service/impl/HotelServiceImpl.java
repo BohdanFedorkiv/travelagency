@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 
 @Transactional
@@ -15,8 +16,12 @@ public class HotelServiceImpl implements HotelService {
     private final HotelDAO hotelDAO;
 
     @Override
-    public void saveHotel(Hotel hotel) {
+    public boolean saveHotel(Hotel hotel) {
+        if(Objects.nonNull(getHotelByName(hotel.getName()))){
+            return false;
+        }
         hotelDAO.saveHotel(hotel);
+        return true;
     }
 
     @Override
@@ -25,13 +30,13 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> searchHotelByCountry(String countryName) {
-        return hotelDAO.searchHotelByCountry(countryName);
+    public List<Hotel> searchHotelByCountryOrCity(String name) {
+        return hotelDAO.searchHotelByCountryOrCity(name);
     }
 
     @Override
-    public Hotel getHotel(String name) {
-        return hotelDAO.getHotel(name).orElse(null);
+    public Hotel getHotelByName(String name) {
+        return hotelDAO.getHotelByName(name).orElse(null);
     }
 
     @Override
@@ -39,4 +44,8 @@ public class HotelServiceImpl implements HotelService {
         hotelDAO.deleteHotel(id);
     }
 
+    @Override
+    public Hotel getHotelById(Long id) {
+        return hotelDAO.getHotelById(id).orElse(null);
+    }
 }

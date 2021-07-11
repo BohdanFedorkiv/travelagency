@@ -11,10 +11,34 @@
 <html>
 <head>
     <title>Sign in</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hotels/allhotels">See all hotels</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/persons/create">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/auth/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <form class="btn__item" action="/auth/logout" method="POST">
+                    <button class="btn" type="submit">Logout </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
-<form:form method="post" action="/persons/signin" modelAttribute="person">
+<form:form method="post" action="/persons/create" modelAttribute="person">
     <table class="table table-bordered">
         <tr>
             <td>
@@ -49,7 +73,7 @@
             </td>
         </tr>
     </table>
-    <button type="submit">Sign in</button>
+    <button type="submit">Register</button>
 </form:form>
 </div>
 <br>

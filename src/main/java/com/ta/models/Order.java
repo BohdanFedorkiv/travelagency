@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -19,11 +21,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "checkin")
     private LocalDate checkin;
 
-    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "checkout")
     private LocalDate checkout;
 
@@ -32,11 +34,10 @@ public class Order {
     @JoinColumn(name = "room_id")
     private Room room;
 
-//    @NotNull
-//    @ManyToOne
-//    @JoinColumn(name = "person_id")
-//    private Person person;
-
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public long getId() {
         return id;
@@ -49,10 +50,7 @@ public class Order {
     public void setCheckin(LocalDate checkin) {
         this.checkin = checkin;
     }
-
-    public LocalDate getCheckout() {
-        return checkout;
-    }
+    public LocalDate getCheckout() { return checkout; }
 
     public void setCheckout(LocalDate checkout) {
         this.checkout = checkout;
@@ -65,4 +63,14 @@ public class Order {
     public void setRoom(Room room) {
         this.room = room;
     }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+
 }

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class RoomDAOImpl implements RoomDAO {
     }
 
     @Override
-    public List<Room> allRooms(int hotel_id) {
+    public List<Room> allRoomsByHotel(int hotel_id) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
@@ -73,4 +74,37 @@ public class RoomDAOImpl implements RoomDAO {
         }
     }
 
+    @Override
+    public void deleteRoom(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Room room = session.find(Room.class, id);
+        session.remove(room);
+        transaction.commit();
+    }
+
+    @Override
+    public List<Room> getAvailableRooms(LocalDate checkin, LocalDate checkout) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            @SuppressWarnings("unchecked")
+            Query query = session.createQuery("FROM Room R " +
+                    "WHERE R.id NOT IN " +
+                    "(SELECT O.room.id FROM Order O " +
+                    "WHERE :checkin BETWEEN O.checkin AND O.checkout " +
+                    "OR :checkout BETWEEN O.checkin AND O.checkout " +
+                    "OR O.checkin BETWEEN :checkin AND :checkout " +
+                    "OR O.checkout BETWEEN :checkin AND :checkout)", Room.class);
+            query.setParameter("checkin", checkin);
+            query.setParameter("checkout", checkout);
+
+            return (List<Room>) query.getResultList();
+        }catch (NullPointerException e){
+            return new ArrayList<>();
+        }finally {
+            transaction.commit();
+        }
+    }
 }
